@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        :root {
+            --bg-light: #f0f0f0;
+            --text-light: #333;
+            --bg-dark: #1e1e1e;
+            --text-dark: #fff;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg-light);
+            color: var(--text-light);
+            transition: background 0.5s, color 0.5s;
+        }
+        .toggle-btn {
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            background: #ff9800;
+            color: white;
+            font-size: 0.8rem;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            transition: transform 0.3s;
+        }
+        .toggle-btn:hover {
+            transform: scale(1.1);
+        }
+        .dark-mode {
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+        }
+        h1, h2 {
+            margin-bottom: 10px;
+        }
+        .content {
+            max-width: 800px;
+        }
+        .builds, .skills {
+            text-align: left;
+            margin-top: 20px;
+        }
+        .builds a, .skills span {
+            display: block;
+            margin-bottom: 5px;
+            text-decoration: none;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <button class="toggle-btn" onclick="toggleDarkMode()">🌙</button>
+    <div class="content">
+        <h1>Welcome to My Portfolio</h1>
+        <p>Explore my projects and skills.</p>
+        
+        <div class="builds">
+            <h2>My Builds</h2>
+            <a href="builds-info.html?build=type-throttle">Type Throttle</a>
+            <a href="builds-info.html?build=cosmic-colonizer">Cosmic Colonizer</a>
+            <a href="builds-info.html?build=space-game">Space Game</a>
+            <a href="builds-info.html?build=smash-or-pass:door-edition">Smash or Pass: Door Edition</a>
+            <a href="builds-info.html?build=hardimages">Hardimages</a>
+            <a href="builds-info.html?build=memedb">MemeDB</a>
+            <a href="builds-info.html?build=gitz">Gitz</a>
+            <a href="builds-info.html?build=raytracing">Raytracing</a>
+            <a href="builds-info.html?build=blogtube">BlogTube</a>
+            <a href="builds-info.html?build=watchdawg">WatchDawg</a>
+        </div>
+
+        <div class="skills">
+            <h2>Skills</h2>
+            <span>Unity</span>
+            <span>Java</span>
+            <span>Spring Boot</span>
+            <span>React.js</span>
+            <span>Bash</span>
+            <span>Python</span>
+            <span>Flask</span>
+        </div>
+    </div>
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
+</body>
+</html>

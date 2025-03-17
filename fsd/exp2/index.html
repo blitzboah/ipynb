@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #fff;
+            padding-top: 50px;
+        }
+        .weather-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            color: #fff;
+        }
+        .weather-info {
+            text-align: center;
+        }
+        .weather-info img {
+            max-width: 120px;
+        }
+        .form-group input {
+            margin-bottom: 15px;
+        }
+        .btn-primary {
+            background-color: #ff9800;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #e68900;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="weather-container text-center">
+            <h2>🌤 Real-Time Weather</h2>
+            <form id="weather-form" class="mt-3">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="city" placeholder="Enter city name" required>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-primary w-100">Get Weather</button>
+                    </div>
+                </div>
+            </form>
+
+            <div id="weather-result" class="weather-info mt-4"></div>
+        </div>
+    </div>
+
+    <script>
+        const apiKey = '741df111a7b84c66b6e82301252502';
+
+        function getWeather(city) {
+            const xhr = new XMLHttpRequest();
+            const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`;
+
+            xhr.open('GET', url, true);
+
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    const data = JSON.parse(xhr.responseText);
+                    displayWeather(data);
+                } else {
+                    console.log('Error:', xhr.statusText);
+                    alert('Error: Unable to fetch weather data');
+                }
+            };
+
+            xhr.onerror = function() {
+                console.log('Network Error or API unreachable');
+                alert('Request failed. Please check your internet connection or try again later.');
+            };
+
+            xhr.send();
+        }
+
+        function displayWeather(data) {
+            const resultDiv = document.getElementById('weather-result');
+
+            if (data && data.current) {
+                const weatherIcon = `https://${data.current.condition.icon}`;
+                const weatherHtml = `
+                    <h3>${data.location.name}, ${data.location.country}</h3>
+                    <img src="${weatherIcon}" alt="Weather Icon">
+                    <h4>${data.current.condition.text}</h4>
+                    <p>Temperature: ${data.current.temp_c}°C</p>
+                    <p>Humidity: ${data.current.humidity}%</p>
+                    <p>Wind Speed: ${data.current.wind_kph} km/h</p>
+                `;
+                resultDiv.innerHTML = weatherHtml;
+            } else {
+                resultDiv.innerHTML = `<p class="text-danger">City not found! Please try again.</p>`;
+            }
+        }
+
+        document.getElementById('weather-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const city = document.getElementById('city').value;
+            if (city) {
+                getWeather(city);
+            }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
