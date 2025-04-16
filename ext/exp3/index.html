@@ -14,10 +14,15 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             background-color: var(--bg-light);
             color: var(--text-light);
             transition: background 0.5s, color 0.5s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
         }
         .toggle-btn {
             padding: 5px 10px;
@@ -41,11 +46,12 @@
         h1, h2 {
             margin-bottom: 10px;
         }
-        .content {
+        .container {
             max-width: 800px;
+            padding: 20px;
         }
         .builds, .skills {
-            text-align: left;
+            text-align: center;
             margin-top: 20px;
         }
         .builds a, .skills span {
@@ -58,9 +64,9 @@
 </head>
 <body>
     <button class="toggle-btn" onclick="toggleDarkMode()">🌙</button>
-    <div class="content">
+    <div class="container">
         <h1>Welcome to My Portfolio</h1>
-        <p>Explore my projects and skills.</p>
+        <p>Hi I can make games, websites, scripts. I can learn anything on the go</p>
         
         <div class="builds">
             <h2>My Builds</h2>
@@ -94,3 +100,4 @@
     </script>
 </body>
 </html>
+
